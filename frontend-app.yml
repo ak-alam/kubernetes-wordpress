@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: wordpress-frontend
+  labels:
+    app: web-server
+spec:
+  selector:
+    matchLabels:
+      app: frontend-app
+  replicas: 1
+  template: #for pod definition
+    metadata:
+      labels:
+        app: frontend-app
+      
+    spec:
+      containers:
+        - name: front-end
+          image: wordpress:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: mysql-service
+            
+            - name: WORDPRESS_DB_USER
+              value: akbardb
+
+            - name: WORDPRESS_DB_PASSWORD
+              value: akbarpwd
+            
+            - name: WORDPRESS_DB_NAME
+              value: wordpressDB
+
+
