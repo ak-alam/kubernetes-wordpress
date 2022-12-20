@@ -22,14 +22,31 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_USER
-              value: akbardb
+              # value: akbardb
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MYSQL_USER
 
             - name: MYSQL_PASSWORD
-              value: akbarpwd
+              # value: akbarpwd
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MYSQL_PASSWORD
 
             - name: MYSQL_ROOT_PASSWORD
-              value: admin@1234!$
+              # value: admin@1234!$
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MYSQL_ROOT_PASSWORD
+
               
             - name: MYSQL_DATABASE
-              value: wordpressDB
+              # value: wordpressDB
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MYSQL_DATABASE
 
