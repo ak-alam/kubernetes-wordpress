@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: frontend-app
-  replicas: 1
+  replicas: 2
   template: #for pod definition
     metadata:
       labels:
@@ -22,15 +22,27 @@ spec:
             - containerPort: 80
           env:
             - name: WORDPRESS_DB_HOST
-              value: mysql-service
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: WORDPRESS_DB_HOST
             
             - name: WORDPRESS_DB_USER
-              value: akbardb
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: WORDPRESS_DB_USER
 
             - name: WORDPRESS_DB_PASSWORD
-              value: akbarpwd
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: WORDPRESS_DB_PASSWORD
             
             - name: WORDPRESS_DB_NAME
-              value: wordpressDB
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: WORDPRESS_DB_NAME
 
 
